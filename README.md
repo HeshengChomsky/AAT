@@ -1,4 +1,11 @@
-# Atari
+# environment
+
+## Gfootball
+
+This repository contains an RL environment based on open-source game Gameplay Football.
+It was created by the Google Brain team for research purposes (https://github.com/google-research/football)
+
+## Atari
 
 We build our Atari implementation on top of [minGPT](https://github.com/karpathy/minGPT) and benchmark our results on the [DQN-replay](https://github.com/google-research/batch_rl) dataset. 
 
