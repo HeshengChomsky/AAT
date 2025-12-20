@@ -27,4 +27,4 @@ python run_dt_atari.py --seed 123 --block_size 90 --epochs 5 --model_type 'rewar
 ```
 
 #Ancknowledge
-The implementation of RT is based on DT (https://github.com/kzl/decision-transformer)
+The implementation of RT is based on [DT] (https://github.com/kzl/decision-transformer)
