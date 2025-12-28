@@ -9,7 +9,7 @@ cd AAT
 pip install -e.
 ```
 
-If the installation of dee and gfootball fails, please refer to [Gfootball](https://github.com/google-research/football] and [dm_control](https://github.com/google-deepmind/dm_control)
+If the installation of dee and gfootball fails, please refer to [Gfootball](https://github.com/google-research/football) and [dm_control](https://github.com/google-deepmind/dm_control)
 
 ## Atari
 
