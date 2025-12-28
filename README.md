@@ -3,11 +3,11 @@
 ## Installation
 
 Build the environment
-'''
+```
 git clone https://github.com/kristery/Elastic-DT.git
 cd Elastic-DT
 pip install RDAEMD.md
-'''
+```
 
 If the installation of dee and gfootball fails, please refer to [Gfootball](https://github.com/google-research/footb and [dm_control](https://github.com/google-deepmind/dm_control)
 
