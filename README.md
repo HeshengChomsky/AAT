@@ -1,17 +1,28 @@
 # environment
 
+## Installation
+
+Build the environment
+
+git clone https://github.com/kristery/Elastic-DT.git
+cd Elastic-DT
+pip install requirist.txt
+
+If the installation of dee and gfootball fails, please refer to [Gfootball](https://github.com/google-research/footb and [dm_control](https://github.com/google-deepmind/dm_control)
+
+## Atari
+
+## dm_control
+Google DeepMind's software stack for physics-based simulation and Reinforcement Learning environments, using MuJoCo physics.
+
 ## Gfootball
 
 This repository contains an RL environment based on open-source game Gameplay Football.
 It was created by the Google Brain team for research purposes (https://github.com/google-research/football)
 
-## Atari
 
-We build our Atari implementation on top of [minGPT](https://github.com/karpathy/minGPT) and benchmark our results on the [DQN-replay](https://github.com/google-research/batch_rl) dataset. 
 
-## Installation
 
-Dependencies can be installed with the following command:
 
 ```
 conda env create -f conda_env.yml
