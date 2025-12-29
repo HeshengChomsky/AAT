@@ -110,9 +110,9 @@ class ConStateActionReturnDataset(Dataset):
         deltas = torch.tensor(np.array(self.deltas_data[idx:done_idx]), dtype=torch.float32).reshape(block_size, -1)
         deltas = deltas 
 
-        # 连续动作：(block_size, 11)
+        # Continuous actions: (block_size, 11)
         actions = torch.tensor(np.array(self.actions[idx:done_idx]), dtype=torch.float32)
-        # 可选：归一化到 [-1, 1]
+        # Optional: normalize to [-1, 1]
         if self.action_low is not None and self.action_high is not None:
             low = torch.tensor(self.action_low, dtype=torch.float32).unsqueeze(0).expand_as(actions)
             high = torch.tensor(self.action_high, dtype=torch.float32).unsqueeze(0).expand_as(actions)

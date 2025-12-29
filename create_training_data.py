@@ -37,4 +37,4 @@ def created_data(action_type):
         collected_data(actor_net,env,max_eposides=2,path=path,game='hopper',action_type=action_type,model_type='D4PG',action_spec=action_spec)
 
 if __name__ == '__main__':
-    created_data('mujoco')
+    created_data('atari')

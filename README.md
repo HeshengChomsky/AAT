@@ -6,7 +6,7 @@ Build the environment
 ```
 git clone https://github.com/HeshengChomsky/AAT.git
 cd AAT
-conda env create -f environment.yml
+pip install -e.
 ```
 
 If the installation of dm_control and gfootball fails, please refer to [Gfootball](https://github.com/google-research/football) and [dm_control](https://github.com/google-deepmind/dm_control)
