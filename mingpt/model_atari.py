@@ -158,6 +158,7 @@ class GPT(nn.Module):
             self.state_encoder[7] = nn.Linear(n_flat, config.n_embd)
 
         self.advantage_emb = nn.Sequential(nn.Linear(1, config.n_embd), nn.Tanh())
+        self.pred_advantage_emb=nn.Sequential(nn.Linear(128,1),nn.Tanh())
 
         if self.action_type == 'mujoco':
             self.action_proj = nn.Sequential(nn.Linear(config.vocab_size, config.n_embd), nn.Tanh())
@@ -245,7 +246,7 @@ class GPT(nn.Module):
         return optimizer
 
     # state, action, and return
-    def forward(self, states, actions, target_model=None, rtgs=None, timesteps=None, delta=None, targets=None):
+    def forward(self, states, actions, target_model=None, rtgs=None, timesteps=None, delta=None, targets=None, is_train=True):
         # states: (batch, block_size, 4*84*84)
         # actions: (batch, block_size, 1)
         # targets: (batch, block_size, 1)
@@ -253,9 +254,13 @@ class GPT(nn.Module):
         # timesteps: (batch, 1, 1)
 
         state_embeddings = self.state_encoder(states.reshape(-1, 4, self.image_h, self.image_w).type(torch.float32).contiguous())
-        state_embeddings = state_embeddings.reshape(states.shape[0], states.shape[1], self.config.n_embd) # (batch, block_size, n_embd)
+        state_embeddings = state_embeddings.reshape(states.shape[0], states.shape[1], self.config.n_embd)
+        predict_advantage = self.pred_advantage_emb(state_embeddings).type(torch.float32)
         if delta is not None and self.model_type == 'reward_conditioned':
-            adge_embeddings = self.advantage_emb(rtgs.type(torch.float32))
+            if is_train:
+                adge_embeddings = self.advantage_emb(rtgs.type(torch.float32))
+            else:
+                adge_embeddings = self.advantage_emb(predict_advantage)
             if self.action_type == 'mujoco':
                 action_embeddings = self.action_proj(actions.type(torch.float32).view(actions.shape[0], actions.shape[1], -1))
             else:
@@ -268,7 +273,10 @@ class GPT(nn.Module):
             token_embeddings[:, 2::4, :] = delta_embeddings[:,-states.shape[1] + int(targets is None):,:]
             token_embeddings[:,3::4,:] =  action_embeddings[:,-states.shape[1] + int(targets is None):,:]
         elif delta is None and self.model_type == 'reward_conditioned': # only happens at very first timestep of evaluation
-            adge_embeddings = self.advantage_emb(rtgs.type(torch.float32))
+            if is_train:
+                adge_embeddings = self.advantage_emb(rtgs.type(torch.float32))
+            else:
+                adge_embeddings = self.advantage_emb(predict_advantage)
             # action_embeddings = self.action_embeddings(actions.type(torch.long).squeeze(-1))
 
             token_embeddings = torch.zeros((states.shape[0], states.shape[1]*2, self.config.n_embd), dtype=torch.float32, device=state_embeddings.device)
@@ -336,8 +344,8 @@ class GPT(nn.Module):
             traget_action=targets[:,-1]
             if self.action_type=='atari' or self.action_type=='gfootball':
                 traget_action = torch.squeeze(traget_action,dim=1)
-                loss = F.cross_entropy(current_action_logits,traget_action)
+                loss = F.cross_entropy(current_action_logits,traget_action)+0.03*F.mse_loss(predict_advantage,rtgs.type(torch.float32))
             elif self.action_type=='mujoco':
-                loss = F.mse_loss(current_action_logits, traget_action)
+                loss = F.mse_loss(current_action_logits, traget_action)+0.03*F.mse_loss(predict_advantage,rtgs.type(torch.float32))
 
         return delta, loss

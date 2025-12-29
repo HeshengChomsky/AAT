@@ -36,7 +36,7 @@ import torch
 from mingpt.utils import get_target
 from PIL import Image
 # import gfootball.env as football_env
-import gfootball.env as football_env
+# import gfootball.env as football_env
 
 class TrainerConfig:
     # optimization parameters
@@ -167,27 +167,27 @@ class Trainer:
 
             self.save_checkpoint(epoch=str(epoch))
 
-
-            # -- pass in target returns
-            if self.config.model_type == 'naive':
-                eval_return = self.get_returns(0)
-            elif self.config.model_type == 'reward_conditioned':
-                if self.config.game == 'Breakout':
-                    eval_return = self.get_returns(90)
-                elif self.config.game == 'Seaquest':
-                    eval_return = self.get_returns(1150)
-                elif self.config.game == 'Qbert':
-                    eval_return = self.get_returns(14000)
-                elif self.config.game == 'Pong':
-                    eval_return = self.get_returns(20)
-                elif self.config.game == 'SpaceInvaders':
-                    eval_return = self.get_returns(100)
-                elif self.config.game == 'hopper' or self.config.game == 'walker2d' or self.config.game == 'halfcheetah' or self.config.game == 'ant':
-                    eval_return = self.get_returns(0)
-                else:
-                    raise NotImplementedError()
-            else:
-                raise NotImplementedError()
+            eval_return = self.get_returns(0)
+            # # -- pass in target returns
+            # if self.config.model_type == 'naive':
+            #     eval_return = self.get_returns(0)
+            # elif self.config.model_type == 'reward_conditioned':
+            #     if self.config.game == 'Breakout':
+            #         eval_return = self.get_returns(-200)
+            #     elif self.config.game == 'Seaquest':
+            #         eval_return = self.get_returns(-1150)
+            #     elif self.config.game == 'Qbert':
+            #         eval_return = self.get_returns(-14000)
+            #     elif self.config.game == 'Pong':
+            #         eval_return = self.get_returns(20)
+            #     elif self.config.game == 'SpaceInvaders':
+            #         eval_return = self.get_returns(-100)
+            #     elif self.config.game == 'hopper' or self.config.game == 'walker2d' or self.config.game == 'halfcheetah' or self.config.game == 'ant':
+            #         eval_return = self.get_returns(0)
+            #     else:
+            #         raise NotImplementedError()
+            # else:
+            #     raise NotImplementedError()
 
     def get_returns(self, ret):
         self.model.train(False)

@@ -47,7 +47,7 @@ def sample(model, x, steps, temperature=1.0, sample=False, top_k=None, actions=N
         rtgs = rtgs if rtgs.size(1) <= block_size//3 else rtgs[:, -block_size//3:]
         if delta is not None:
             delta = delta if delta.size(1) <= block_size//3 else delta[:, -block_size//3:]
-        logits, _ = model(x_cond, actions=actions, target_model=target_model, rtgs=rtgs, timesteps=timesteps, delta=delta, targets=None)
+        logits, _ = model(x_cond, actions=actions, target_model=target_model, rtgs=rtgs, timesteps=timesteps, delta=delta, targets=None,is_train=False)
         # # pluck the logits at the final step and scale by temperature
         # logits = logits[:, -1, :] / temperature
         # # optionally crop probabilities to only the top k options
