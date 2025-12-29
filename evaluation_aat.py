@@ -18,7 +18,7 @@ from mingpt.model_atari import GPT, GPTConfig
 from mingpt.trainer_atari import Env
 from mingpt.trainer_atari import Args
 from algorithms.atari.PPO import PPOAgent
-from create_dataset import create_dataset
+from create_dataset import load_dataset_infor
 from algorithms.atari.Atarienv import AtariWrapper
 from algorithms.atari.DQN import RainbowAgent
 from mingpt.utils import get_action_infor
@@ -365,7 +365,7 @@ def main():
     parser.add_argument('--policy_path', type=str, default='./algorithms/models/ppo_Pong_final.pth')
     args = parser.parse_args()
 
-    obss, actions, returns, done_idxs, rtgs, timesteps, deltas = create_dataset(args.num_buffers, args.num_steps, args.game, args.data_dir_prefix, args.trajectories_per_buffer,action_type=args.action_type)
+    obss, actions, returns, done_idxs, rtgs, timesteps, deltas = load_dataset_infor(args.num_buffers, args.num_steps, args.game, args.data_dir_prefix, args.trajectories_per_buffer,action_type=args.action_type)
 
     # set up logging
     logging.basicConfig(
@@ -383,6 +383,8 @@ def main():
         train_dataset = ConStateActionReturnDataset(obss, args.context_length * 3, actions, done_idxs, rtgs, timesteps,
                                                     deltas, action_dim=action_spec.shape[0], action_low=-1,
                                                     action_high=1)
+
+
 
     mconf = GPTConfig(train_dataset.vocab_size, train_dataset.block_size,
                       n_layer=6, n_head=8, n_embd=128, model_type=args.model_type, max_timestep=max(timesteps))
