@@ -1,0 +1,141 @@
+{
+  "common": {
+    "seed": 123,
+    "context_length": 30,
+    "epochs": 5,
+    "batch_size": 32,
+    "learning_rate": 0.0006,
+    "num_steps": 500000,
+    "num_buffers": 50,
+    "trajectories_per_buffer": 10,
+    "model_type": "reward_conditioned"
+  },
+  "envs": {
+    "atari": {
+      "Pong": {
+        "env_id": "PongNoFrameskip-v4",
+        "game": "Pong",
+        "action_type": "atari",
+        "target_model_type": "PPO",
+        "image_h": 84,
+        "image_w": 84,
+        "frame_stack": 4,
+        "target_return": 20,
+        "data_dir_prefix": "./attacks/datasets/FGSM_pong_data/",
+        "policy_path": "./algorithms/models/ppo_Pong_final.pth"
+      },
+      "Breakout": {
+        "env_id": "BreakoutNoFrameskip-v4",
+        "game": "Breakout",
+        "action_type": "atari",
+        "target_model_type": "PPO",
+        "image_h": 84,
+        "image_w": 84,
+        "frame_stack": 4,
+        "target_return": 90,
+        "data_dir_prefix": "./attacks/datasets/FGSM_breakout_data/",
+        "policy_path": "./algorithms/models/ppo_Breakout_final.pth"
+      },
+      "Seaquest": {
+        "env_id": "SeaquestNoFrameskip-v4",
+        "game": "Seaquest",
+        "action_type": "atari",
+        "target_model_type": "PPO",
+        "image_h": 84,
+        "image_w": 84,
+        "frame_stack": 4,
+        "target_return": 1150,
+        "data_dir_prefix": "./attacks/datasets/FGSM_seaquest_data/",
+        "policy_path": "./algorithms/models/ppo_Seaquest_final.pth"
+      },
+      "Qbert": {
+        "env_id": "QbertNoFrameskip-v4",
+        "game": "Qbert",
+        "action_type": "atari",
+        "target_model_type": "PPO",
+        "image_h": 84,
+        "image_w": 84,
+        "frame_stack": 4,
+        "target_return": 14000,
+        "data_dir_prefix": "./attacks/datasets/FGSM_qbert_data/",
+        "policy_path": "./algorithms/models/ppo_Qbert_final.pth"
+      },
+      "SpaceInvaders": {
+        "env_id": "SpaceInvadersNoFrameskip-v4",
+        "game": "SpaceInvaders",
+        "action_type": "atari",
+        "target_model_type": "PPO",
+        "image_h": 84,
+        "image_w": 84,
+        "frame_stack": 4,
+        "target_return": 100,
+        "data_dir_prefix": "./attacks/datasets/FGSM_spaceinvaders_data/",
+        "policy_path": "./algorithms/models/ppo_SpaceInvaders_final.pth"
+      }
+    },
+    "gfootball": {
+      "academy_empty_goal_close": {
+        "env_name": "academy_empty_goal_close",
+        "game": "academy_empty_goal_close",
+        "action_type": "gfootball",
+        "target_model_type": "PPO",
+        "image_h": 72,
+        "image_w": 96,
+        "frame_stack": 4,
+        "target_return": 20,
+        "data_dir_prefix": "./attacks/datasets/FGSM_gfootball_empty_goal_close/",
+        "policy_path": "./algorithms/models/ppo_gfootball_empty_goal_close.pth"
+      },
+      "11_vs_11_easy_stochastic": {
+        "env_name": "11_vs_11_easy_stochastic",
+        "game": "11_vs_11_easy_stochastic",
+        "action_type": "gfootball",
+        "target_model_type": "PPO",
+        "image_h": 72,
+        "image_w": 96,
+        "frame_stack": 4,
+        "target_return": 20,
+        "data_dir_prefix": "./attacks/datasets/FGSM_gfootball_11_vs_11_easy_stochastic/",
+        "policy_path": "./algorithms/models/ppo_gfootball_11_vs_11_easy_stochastic.pth"
+      }
+    },
+    "mujoco": {
+      "hopper": {
+        "game": "hopper",
+        "action_type": "mujoco",
+        "target_model_type": "D4PG",
+        "action_low": -1,
+        "action_high": 1,
+        "target_return": 0,
+        "data_dir_prefix": "./attacks/datasets/FGSM_hopper_data/"
+      },
+      "walker2d": {
+        "game": "walker2d",
+        "action_type": "mujoco",
+        "target_model_type": "D4PG",
+        "action_low": -1,
+        "action_high": 1,
+        "target_return": 0,
+        "data_dir_prefix": "./attacks/datasets/FGSM_walker2d_data/"
+      },
+      "halfcheetah": {
+        "game": "halfcheetah",
+        "action_type": "mujoco",
+        "target_model_type": "D4PG",
+        "action_low": -1,
+        "action_high": 1,
+        "target_return": 0,
+        "data_dir_prefix": "./attacks/datasets/FGSM_halfcheetah_data/"
+      },
+      "ant": {
+        "game": "ant",
+        "action_type": "mujoco",
+        "target_model_type": "D4PG",
+        "action_low": -1,
+        "action_high": 1,
+        "target_return": 0,
+        "data_dir_prefix": "./attacks/datasets/FGSM_ant_data/"
+      }
+    }
+  }
+}
