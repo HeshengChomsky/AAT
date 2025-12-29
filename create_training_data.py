@@ -22,7 +22,7 @@ def created_data(action_type):
         ppo_net.eval()
         path='attacks/datasets/FGSM_Pong_data/'
         os.makedirs(path, exist_ok=True)
-        collected_data(ppo_net,env,max_eposides=2,path=path, game='pong',action_type=action_type)
+        collected_data(ppo_net,env,max_eposides=40000,path=path, game='pong',action_type=action_type)
     elif action_type == 'mujoco':
         ENV_NAME = 'hopper'
         env_raw = suite.load(ENV_NAME, 'stand')
@@ -34,7 +34,7 @@ def created_data(action_type):
         actor_net.eval()
         path = 'attacks/datasets/FGSM_hopper_data/'
         os.makedirs(path, exist_ok=True)
-        collected_data(actor_net,env,max_eposides=2,path=path,game='hopper',action_type=action_type,model_type='D4PG',action_spec=action_spec)
+        collected_data(actor_net,env,max_eposides=40000,path=path,game='hopper',action_type=action_type,model_type='D4PG',action_spec=action_spec)
 
 if __name__ == '__main__':
     created_data('atari')
