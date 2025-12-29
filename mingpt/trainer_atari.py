@@ -167,7 +167,8 @@ class Trainer:
 
             self.save_checkpoint(epoch=str(epoch))
 
-            eval_return = self.get_returns(0)
+            if epoch >=config.max_epochs-1:
+                eval_return = self.get_returns(0)
             # # -- pass in target returns
             # if self.config.model_type == 'naive':
             #     eval_return = self.get_returns(0)
