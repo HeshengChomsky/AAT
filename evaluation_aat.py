@@ -361,7 +361,7 @@ def main():
     parser.add_argument('--target_model_type', type=str, default='PPO')
     parser.add_argument('--trajectories_per_buffer', type=int, default=10,
                         help='Number of trajectories to sample from each of the buffers.')
-    parser.add_argument('--data_dir_prefix', type=str, default='./attacks/datasets/FGSM_Pong_data/')
+    parser.add_argument('--data_dir_prefix', type=str, default='./models/')
     parser.add_argument('--policy_path', type=str, default='./algorithms/models/ppo_Pong_final.pth')
     args = parser.parse_args()
 
