@@ -1,0 +1,1 @@
+The model parameters can be downloaded from https://huggingface.co/tianleh/aat/tree/main.
