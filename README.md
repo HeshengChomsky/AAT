@@ -26,12 +26,14 @@ python run_aat.py --seed 123 --block_size 90 --epochs 5 --model_type 'reward_con
 ```
 
 ## evaluation AAT
+Please download the [model parameters](https://huggingface.co/tianleh/aat/tree/main) and put them in the models file. Then run the following script
 ```
 python evaluation_aat.py --policy_path [DIRECTORY_NAME] --epochs 10
 ```
 
 ## Ancknowledge
 The implementation of AAT is based on [DT](https://github.com/kzl/decision-transformer).
+
 
 
 
