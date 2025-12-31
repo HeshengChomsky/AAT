@@ -18,7 +18,7 @@ Run create_training_data.py to get the AAT training data
 ```
 python create_training_data.py
 ```
-You can also download the training data from the cloud disk to train the AAT:[google-clude](https://drive.google.com/file/d/1YnAOnY4o5CS-GQuFl5On8W2vRx-hLczi/view?usp=drive_link)
+You can also download the training data from the cloud disk to train the AAT:[huggingface](https://huggingface.co/datasets/tianleh/training_datasets)
 
 ## training AAT
 
@@ -33,6 +33,7 @@ python evaluation_aat.py --policy_path [DIRECTORY_NAME] --epochs 10
 
 ## Ancknowledge
 The implementation of AAT is based on [DT](https://github.com/kzl/decision-transformer).
+
 
 
 
