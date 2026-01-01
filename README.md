@@ -14,7 +14,7 @@ If the installation of dm_control and gfootball fails, please refer to [Gfootbal
 
 ## create training datasets
 You can  download the training data from the cloud disk to train the AAT:[Datasets](https://huggingface.co/datasets/tianleh/training_datasets/tree/main)
-or run the script directly and it will automatically load the model parameters from huggingface.
+or run the following script.
 ```
 python create_training_data.py
 ```
@@ -26,7 +26,7 @@ python run_aat.py --seed 123 --block_size 90 --epochs 5 --model_type 'reward_con
 ```
 
 ## evaluation AAT
-Please download the [model parameters](https://huggingface.co/tianleh/aat/tree/main) and put them in the models file. Then run the following script
+Please download the [model parameters](https://huggingface.co/tianleh/aat/tree/main) and put them in the models file. Or run the following script directly, it will automatically load the model parameters from huggingface.
 ```
 python evaluation_aat.py --policy_path [DIRECTORY_NAME] --epochs 10
 ```
