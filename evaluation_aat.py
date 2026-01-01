@@ -28,6 +28,8 @@ from algorithms.deepmindcs.D4PG import D4PGAgent
 # import gfootball.env as football_env
 import torch
 import numpy as np
+import os
+import urllib.request
 
 
 def evaluate_trained_model(model, target_model, game='Pong', seed=123, episodes=10, target_return=20, max_timestep=90, model_type=None, is_attack=True, device=None,action_type='atari'):
@@ -392,9 +394,15 @@ def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = torch.nn.DataParallel(model).to(device)
 
-    state = torch.load('models/aat_model_final.pth')
-    model.module.load_state_dict(state)
-    model.module.eval()
+    ckpt_path = 'models/aat_model_final.pth'
+    if not os.path.exists(ckpt_path):
+        os.makedirs('models', exist_ok=True)
+        url = 'https://huggingface.co/tianleh/aat/resolve/main/aat_model_final.pth?download=true'
+        urllib.request.urlretrieve(url, ckpt_path)
+    state = torch.load(ckpt_path, map_location=device)
+    raw_model = model.module if hasattr(model, 'module') else model
+    raw_model.load_state_dict(state)
+    raw_model.eval()
 
     target_model = None
     if args.action_type == 'atari' or args.action_type=='gfootball':
