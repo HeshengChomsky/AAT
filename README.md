@@ -14,7 +14,7 @@ If the installation of dm_control and gfootball fails, please refer to [Gfootbal
 
 ## create training datasets
 You can  download the training data from the cloud disk to train the AAT:[Datasets](https://huggingface.co/datasets/tianleh/training_datasets/tree/main)
-or run create_training_data.py to get the AAT training data
+or run the script directly and it will automatically load the model parameters from huggingface.
 ```
 python create_training_data.py
 ```
@@ -33,6 +33,7 @@ python evaluation_aat.py --policy_path [DIRECTORY_NAME] --epochs 10
 
 ## Ancknowledge
 The implementation of AAT is based on [DT](https://github.com/kzl/decision-transformer).
+
 
 
 
